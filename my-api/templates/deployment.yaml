@@ -19,7 +19,7 @@ spec:
       initContainers:
         - name: init
           image: busybox
-          command: ['sh', '-c', 'echo "<html><body><h1>Bienvenue sur mon Challenge !!</h1></body></html>" > /usr/share/nginx/html/index.html']
+          command: ['sh', '-c', 'echo "<html><body><h1>Bienvenue sur mon Challenge!!</h1></body></html>" > /usr/share/nginx/html/index.html']
           volumeMounts:
             - mountPath: /usr/share/nginx/html
               name: volume
