@@ -22,11 +22,11 @@ spec:
           volumeMounts:
             - mountPath: /usr/share/nginx/html
               name: {{ .Release.Name }}-pvc
+      initContainers:
+      - name: init
+        image: busybox
+        command: ['sh', '-c', 'echo "<html><body><h1>Bonjour, Tout le monde!</h1></body></html>" > /usr/share/nginx/html/index.html']
       volumes:
       - name: {{ .Release.Name }}-pvc
         persistentVolumeClaim:
           claimName: {{ .Release.Name }}-pvc
-      initContainers:
-        - name: init
-          image: busybox
-          command: ['sh', '-c', 'echo "<html><body><h1>Bonjour, Tout le monde!</h1></body></html>" > /usr/share/nginx/html/index.html']
