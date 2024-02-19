@@ -1,7 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: adolfo-deployment
+  name: {{ .Release.Name }}-deployment
+  labels: 
+  app: {{ .Release.Name }}
+  app.kubernetes.io/name: {{ .Release.Name }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -16,10 +19,12 @@ spec:
         - name: nginx
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 80
           volumeMounts:
             - mountPath: /usr/share/nginx/html
-              name: volume
+              name: {{ .Release.Name }}-pvc
       volumes:
-      - name: volume
+      - name: {{ .Release.Name }}-pvc
         persistentVolumeClaim:
           claimName: {{ .Release.Name }}-pvc
