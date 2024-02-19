@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  index.html: |
+    <html>
+    <body>
+    <h1>Bonjour, monde!</h1>
+    </body>
+    </html>
