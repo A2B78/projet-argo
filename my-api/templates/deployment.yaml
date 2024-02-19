@@ -21,17 +21,17 @@ spec:
           volumeMounts:
             - mountPath: /usr/share/nginx/html
               name: {{ .Release.Name }}-pvc
-      initContainers:
-        - name: init
-          image: alpine/git
-          command:
-          - /bin/sh
-          - -c
-          - |
-            git clone https://github.com/A2B78/projet-argo.git /projet-argo && cp -R /projet-argo/site/* /usr/share/nginx/html/
-          volumeMounts:
-            - name: {{ .Release.Name }}-pvc
-              mountPath: /usr/share/nginx/html
+      # initContainers:
+      #   - name: init
+      #     image: alpine/git
+      #     command:
+      #     - /bin/sh
+      #     - -c
+      #     - |
+      #       git clone https://github.com/A2B78/projet-argo.git /projet-argo && cp -R /projet-argo/site/* /usr/share/nginx/html/
+      #     volumeMounts:
+      #       - name: {{ .Release.Name }}-pvc
+      #         mountPath: /usr/share/nginx/html
       volumes:
       - name: {{ .Release.Name }}-pvc
         persistentVolumeClaim:
