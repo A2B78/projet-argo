@@ -23,3 +23,7 @@ spec:
           volumeMounts:
             - mountPath: /usr/share/nginx/html
               name: volume
+      volumes:
+      - name: volume
+        persistentVolumeClaim:
+          claimName: {{ .Release.Name }}-pvc
