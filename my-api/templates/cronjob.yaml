@@ -11,6 +11,6 @@ spec:
           containers:
             - name: {{ .Release.Name }}-job
               image: busybox:latest
-              imagePullPolicy: {{ .Values.jobImage.pullPolicy }}
+              imagePullPolicy: IfNotPresent
               command: {{ .Values.cronjob.command }}
           restartPolicy: OnFailure
