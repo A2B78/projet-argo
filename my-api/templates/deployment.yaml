@@ -19,9 +19,7 @@ spec:
       initContainers:
         - name: init
           image: busybox
-          command: ['sh', '-c', 'echo "
-          <!DOCTYPE html>
-          <html>
+          command: ['sh', '-c', 'echo "<!DOCTYPE html> <html>
           <head>
               <style>
                   body {
