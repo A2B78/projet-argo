@@ -9,7 +9,7 @@ service:
 pvc:
   accessModes:
     - ReadWriteOnce
-  storageClassName: ma-storage-class
+  storageClassName: s3-standard
   resources:
     requests:
       storage: 1Gi
