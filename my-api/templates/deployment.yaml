@@ -19,7 +19,33 @@ spec:
       initContainers:
         - name: init
           image: busybox
-          command: ['sh', '-c', 'echo "<html><body><h1>Bonjour, monde!</h1></body></html>" > /usr/share/nginx/html/index.html']
+          command: ['sh', '-c', 'echo "<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .centered {
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="centered">
+        <h1>Helloo les DevOps, Challenge OK!!</h1>
+    </div>
+</body>
+</html>" > /usr/share/nginx/html/index.html']
           volumeMounts:
             - mountPath: /usr/share/nginx/html
               name: volume
