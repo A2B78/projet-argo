@@ -1,8 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
-name: {{ .Release.Name }}-deployment
 metadata:
-  name: {{ .Release.Name }}-deployment
+  name: adolfo-deployment
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
