@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
             - name: {{ .Release.Name }}-job
-              image: "{{ .Values.jobImage.repository }}:{{ .Values.jobImage.tag }}"
+              image: "{{ .Values.jobImage. }}:{{ .Values.jobImage.tag }}"
               imagePullPolicy: {{ .Values.jobImage.pullPolicy }}
               command: {{ .Values.cronjob.command }}
           restartPolicy: OnFailure

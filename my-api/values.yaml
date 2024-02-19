@@ -15,7 +15,7 @@ pvc:
 cronjob:
   schedule: "0 * * * *"
   jobImage:
-    repository: busybox
-    tag: 1.28
+    repository: "busybox"
+    tag: "1.28"
     pullPolicy: IfNotPresent
   command: ['date']
