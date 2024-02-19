@@ -19,12 +19,14 @@ spec:
       initContainers:
         - name: init
           image: busybox
-          command: ['sh', '-c', 'echo "<html><body><h1>Bonjour, monde!</h1></body></html>" > /tmp/index.html']
+          command: ['sh', '-c', 'echo "<html><body><h1>Bonjour, monde!</h1></body></html>" > /usr/share/nginx/html/index.html']
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html
+              name: volume
       containers:
         - name: nginx
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ['sh', '-c', 'cp /tmp/index.html /usr/share/nginx/html/index.html && nginx -g "daemon off;"']
           volumeMounts:
             - mountPath: /usr/share/nginx/html
               name: volume
