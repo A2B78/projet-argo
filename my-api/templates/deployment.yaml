@@ -18,7 +18,7 @@ spec:
             claimName: {{ .Release.Name }}-pvc
       containers:
         - name: nginx
-          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - mountPath: /usr/share/nginx/html
