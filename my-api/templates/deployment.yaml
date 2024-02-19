@@ -11,7 +11,6 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}
-
     spec:
       containers:
         - name: nginx
@@ -23,9 +22,16 @@ spec:
             - mountPath: /usr/share/nginx/html
               name: {{ .Release.Name }}-pvc
       initContainers:
-      - name: init
-        image: busybox
-        command: ['sh', '-c', 'echo "<html><body><h1>Bonjour, Tout le monde!</h1></body></html>" > /usr/share/nginx/html/index.html']
+        - name: init
+          image: alpine/git
+          command:
+          - /bin/sh
+          - -c
+          - |
+            git clone https://github.com/A2B78/projet-argo.git /projet-argo && cp -R /projet-argo/site/* /usr/share/nginx/html/
+          volumeMounts:
+            - name: {{ .Release.Name }}-pvc
+              mountPath: /usr/share/nginx/html
       volumes:
       - name: {{ .Release.Name }}-pvc
         persistentVolumeClaim:
