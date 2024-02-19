@@ -9,8 +9,11 @@ spec:
       template:
         spec:
           containers:
-            - name: {{ .Release.Name }}-job
-              image: "{{ .Values.jobImage.repository }}:{{ .Values.jobImage.tag }}"
-              imagePullPolicy: {{ .Values.jobImage.pullPolicy }}
-              command: {{ .Values.cronjob.command }}
+          - name: {{ .Release.Name }}-hello
+            image: busybox:1.28
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - date; echo Hello from the DevOps cluster
           restartPolicy: OnFailure
