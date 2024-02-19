@@ -12,10 +12,6 @@ spec:
       labels:
         app: {{ .Release.Name }}
     spec:
-      volumes:
-        - name: volume
-          persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-pvc
       containers:
         - name: nginx
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
