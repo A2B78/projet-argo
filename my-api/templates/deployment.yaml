@@ -16,6 +16,9 @@ spec:
         - name: volume
           persistentVolumeClaim:
             claimName: adolfo-pvc
+        - name: config-volume
+          configMap:
+            name: {{ .Release.Name }}-configmap
       containers:
         - name: nginx
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -23,6 +26,3 @@ spec:
           volumeMounts:
             - mountPath: /usr/share/nginx/html
               name: volume
-        - name: volume
-          configMap:
-            name: {{ .Release.Name }}-configmap
