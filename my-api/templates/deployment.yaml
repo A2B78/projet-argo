@@ -14,12 +14,8 @@ spec:
     spec:
       volumes:
         - name: volume
-          configMap: {{ .Release.Name }}-configmap
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-pvc
-          # volumeMounts:
-          #   - mountPath: /usr/share/nginx/html
-          #     name: volume
       containers:
         - name: nginx
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
