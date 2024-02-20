@@ -13,13 +13,16 @@ spec:
         app: {{ .Release.Name }}
     spec:
       volumes:
-        - name: {{ .Release.Name }}-html
-          configMap:
-            name: {{ .Release.Name }}-configmap
+        - name: volume
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-pvc
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html
+              name: volume
       containers:
         - name: nginx
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - mountPath: /usr/share/nginx/html
-              name: {{ .Release.Name }}-html
+              name: volume
