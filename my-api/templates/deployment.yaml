@@ -12,6 +12,15 @@ spec:
       labels:
         app: {{ .Release.Name }}
     spec:
+      initContainers:
+      - name: init-config
+        image: busybox
+        command: ['sh', '-c', 'cp /config/index.html /html']
+        volumeMounts:
+        - name: config-volume
+          mountPath: /config
+        - name: html-volume
+          mountPath: /html
       containers:
         - name: nginx
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -20,14 +29,13 @@ spec:
             - containerPort: 80
           volumeMounts:
             - mountPath: /usr/share/nginx/html
-              name: {{ .Release.Name }}-pvc
-            - mountPath: /usr/share/nginx/html/index.html
-              name: configmap-volume
-              subPath: index.html
+              name: html-volume
       volumes:
       - name: {{ .Release.Name }}-pvc
         persistentVolumeClaim:
           claimName: {{ .Release.Name }}-pvc
-      - name: configmap-volume
+      - name: config-volume
         configMap:
           name: {{ .Release.Name }}-configmap
+      - name: html-volume
+        emptyDir: {}
