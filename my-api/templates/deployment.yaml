@@ -13,9 +13,7 @@ spec:
         app: {{ .Release.Name }}
     spec:
       volumes:
-        - name: volume
-         persistentVolumeClaim:
-            claimName: adolfo-pvc
+        - name: {{ .Release.Name }}-html
           configMap:
             name: {{ .Release.Name }}-configmap
       containers:
@@ -24,4 +22,4 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - mountPath: /usr/share/nginx/html
-              name: volume
+              name: {{ .Release.Name }}-html
