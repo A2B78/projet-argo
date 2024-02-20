@@ -1,8 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: {{ .Release.Name }}
+  name: {{ .Release.Name }}-deployment
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -14,14 +13,21 @@ spec:
         app: {{ .Release.Name }}
     spec:
       containers:
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        name: {{ .Values.image.repository }}
-        ports:
-          - containerPort: 80
-        volumeMounts:
-          - mountPath: /usr/share/nginx/html
-          name: volume
+        - name: nginx
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html
+              name: {{ .Release.Name }}-pvc
+            - mountPath: /usr/share/nginx/html/index.html
+              name: configmap-volume
+              subPath: index.html
       volumes:
-        - name: volume
-          persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-pvc
+      - name: {{ .Release.Name }}-pvc
+        persistentVolumeClaim:
+          claimName: {{ .Release.Name }}-pvc
+      - name: configmap-volume
+        configMap:
+          name: {{ .Release.Name }}-configmap
