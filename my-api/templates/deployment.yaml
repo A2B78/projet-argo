@@ -13,7 +13,7 @@ spec:
         app: {{ .Release.Name }}
     spec:
       volumes:
-        - name: html
+        - name: volume
           configMap:
             name: {{ .Release.Name }}-configmap
       containers:
@@ -22,4 +22,4 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - mountPath: /usr/share/nginx/html
-              name: html
+              name: volume
