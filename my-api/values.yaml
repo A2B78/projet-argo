@@ -7,7 +7,7 @@ service:
   type: LoadBalancer
   port: 80
 pvc:
-  accessModes:
+  accessModes: 
     - ReadWriteOnce
   storageClassName: gp2
   resources:
