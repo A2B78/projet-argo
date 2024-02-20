@@ -14,9 +14,8 @@ spec:
     spec:
       volumes:
         - name: volume
-          persistentVolumeClaim:
+         persistentVolumeClaim:
             claimName: adolfo-pvc
-        - name: config-volume
           configMap:
             name: {{ .Release.Name }}-configmap
       containers:
