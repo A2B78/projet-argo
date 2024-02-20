@@ -23,6 +23,6 @@ spec:
           volumeMounts:
             - mountPath: /usr/share/nginx/html
               name: volume
-        - name: config-volume
+        - name: volume
           configMap:
             name: {{ .Release.Name }}-configmap
