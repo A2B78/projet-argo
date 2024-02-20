@@ -4,7 +4,6 @@ metadata:
   name: {{ .Release.Name }}-pvc
   labels:
     app: {{ .Release.Name }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
 spec:
   accessModes: {{ .Values.pvc.accessModes }}
   storageClassName: {{ .Values.pvc.storageClassName }}
