@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   labels:
     app: {{ .Release.Name }}
-  name: {{ .Release.Name }}-deployment
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
